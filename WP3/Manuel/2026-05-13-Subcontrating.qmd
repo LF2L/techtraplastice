@@ -11,7 +11,7 @@ author:
         country: France
         postal-code: 54000
 address:
-  - Dr. **Manuel Alberto Mateu**
+  - Ing. **Manuel Alberto Mateu**
   - Consultor Independiente -- Ingeniero Industrial
   - Almirante Segui 2056  - Ciudad Autónoma de Buenos Aires  - Argentina
   - "Telefono +54 1161170710"
@@ -19,14 +19,19 @@ address:
 subject-title: "Devis de Prestation"
 subject: "**Analyse comparative des pratiques efficaces de réutilisation à fort impact.**"
 opening: "**Contexte**"
-closing: "Bien Cordialement"
+closing: "Bien Cordialement,"
 
 fontsize: 12pt
 format:
   letter-pdf:
     output-file: index
-    include-in-header: [../../assets/TTPLCE-packages.tex]
     keep-tex: false
+    include-in-header:
+      - file: ../../assets/TTPLCE-packages.tex
+      - text: |
+          \fancyhead[R]{{\thepage} de \pageref{LastPage}}
+
+
 ---
 
 
@@ -57,21 +62,23 @@ Ce travail propose d'identifier, de recenser et d'analyser les modes de fonction
 
 **Livrables proposés**
 
-1 - Recensement préliminaire et construction de l’« univers » : constituer une présélection d’expériences hétérogènes afin de sélectionner ensuite des cas représentatifs de différents modèles. Fiche succincte standardisée par expérience pour saisir les variables minimales comparables. Tableaux comparatifs avec la présélection de cas comparables.
+1. Recensement préliminaire et construction de l’"univers" : constituer une présélection d’expériences hétérogènes afin de sélectionner ensuite des cas représentatifs de différents modèles. Fiche succincte standardisée par expérience pour saisir les variables minimales comparables. Tableaux comparatifs avec la présélection de cas comparables.
 
-2 - Typologie des schémas, cadre comparatif de base et sélection des cas : définir des typologies de base et construire une matrice de comparaison (indicateurs et dimensions) en mettant l'accent sur les exigences des Search Conferences. Critères de sélection des cas. Sélection des cas d'analyse (entre 4 et 7 cas représentatifs et 3 cas d'innovation ou plus).
+2. Typologie des schémas, cadre comparatif de base et sélection des cas : définir des typologies de base et construire une matrice de comparaison (indicateurs et dimensions) en mettant l'accent sur les exigences des Search Conferences. Critères de sélection des cas. Sélection des cas d'analyse (entre 4 et 7 cas représentatifs et 3 cas d'innovation ou plus).
 
-3 - Rapport de diagnostic local : analyse des systèmes de récupération des plastiques en AR, CL et CO, y compris la législation (REP, économie circulaire), les acteurs, les infrastructures et les défis. Analyse des possibilités d'adaptation des cas d'analyse au contexte local.
+3. Rapport de diagnostic local : analyse des systèmes de récupération des plastiques en AR, CL et CO, y compris la législation (REP, économie circulaire), les acteurs, les infrastructures et les défis. Analyse des possibilités d'adaptation des cas d'analyse au contexte local.
 
-4 - Carte des acteurs et des problèmes clés : parties prenantes, rôles et tensions. Récupérateurs de base, gouvernements et entreprises.
+4. Carte des acteurs et des problèmes clés : parties prenantes, rôles et tensions. Récupérateurs de base, gouvernements et entreprises.
 
-5 - Rapport de benchmarking : profils des cas, comparaison transversale, enseignements transférables. Matrice comparative finale.
+5. Rapport de benchmarking : profils des cas, comparaison transversale, enseignements transférables. Matrice comparative finale.
 
-6 - Synthèse stratégique pour la Search Conference : élaboration de supports de discussion, proposition d'ordre du jour. Réunions préliminaires et présentation pour la « Search Conference ».
+6. Synthèse stratégique pour la Search Conference : élaboration de supports de discussion, proposition d'ordre du jour. Réunions préliminaires et présentation pour la "Search Conference" .
 
-7 - Mise à jour du document : sur la base des résultats et du bilan des « Search Conferences », une mise à jour du document sera effectuée en tenant compte des contributions et des retours qui en découleront.
+7. Mise à jour du document : sur la base des résultats et du bilan des "Search Conferences", une mise à jour du document sera effectuée en tenant compte des contributions et des retours qui en découleront.
 
-Le travail comprend également la participation via Zoom aux réunions préparatoires des « Search Conferences » de Córdoba et de Río Negro, ainsi que la participation en présentiel à ces dernières au cours de l'année 2027.
+Le travail comprend également la participation via Zoom aux réunions préparatoires des " Search Conferences " de Córdoba et de Río Negro, ainsi que la participation en présentiel à ces dernières au cours de l'année 2027.
+
+\newpage
 
 **Calendrier des livrables**
 
@@ -85,18 +92,31 @@ Le travail comprend également la participation via Zoom aux réunions préparat
 
 Le règlement s'effectuera en deux tranches :
 
-- 3 000 € à la signature du présent contrat.
-- 3 000 € à la réception et à l'approbation des 7 livrables.
+- 3 000 euros à la signature du présent contrat.
+- 3 000 euros à la réception et à l'approbation des 7 livrables par l'équipe de Columbus et du Coordinateur de TechTraPlastiCE.
 
 
-
-\begin{textblock}{10}(9,13)
+\begin{textblock}{10}(2,13)
   \fontsize{11}{8}
   \selectfont \sffamily
   \color[gray]{0.4}
   \begin{tabular}{@{}l@{}}
     \hline \\
-    Asst. Prof. \textbf{Fabio A. CRUZ SANCHEZ} \\
+    Ing. \textbf{Manuel Alberto Mateu} \\
+    Almirante Segui 2056 \\ 
+    Ciudad Autónoma de Buenos Aires  - Argentina \\
+    \faIcon{envelope} \href{mailto:manuelrsu@gmail.com}{manuelrsu@gmail.com} \\
+    \faIcon{phone} +54 11 61 17 07 10 \\
+  \end{tabular}
+\end{textblock}
+
+\begin{textblock}{10}(13,13)
+  \fontsize{11}{8}
+  \selectfont \sffamily
+  \color[gray]{0.4}
+  \begin{tabular}{@{}l@{}}
+    \hline \\
+    MCF. \textbf{Fabio A. CRUZ SANCHEZ} \\
     8 rue Bastien Lepage,  54000 Nancy \\[0.15cm]
     \faIcon{envelope} \href{mailto:fabio.cruz@univ-lorraine.fr}{fabio.cruz@univ-lorraine.fr} \\
     \faIcon{phone} +33 3 72 74 35 31 \\

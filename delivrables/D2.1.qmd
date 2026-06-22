@@ -19,6 +19,7 @@ bibliography:
   - assets/Zotero.bib
 csl: assets/journal-of-cleaner-production.csl
 fig-align: center
+latex-tinytex: false
 format:
   pdf:
     keep-tex: true
@@ -38,6 +39,7 @@ library(readxl)
 library(here)
 
 ```
+
 
 
 
@@ -409,26 +411,49 @@ In the annexes @sec-A2, the complete raw data is plotted for the four questionna
 
 ## Developments at each HEIs
 
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.75}
+
 ```{r}
 #| label: tbl-developments
 #| tbl-cap: "Primary dataset of **Developments** at each HEI. Complete dataset is found in the Annex"
+#| eval: true
+#| include: true
 
 # Global data
 # datos <- 
-# read_excel(here("delivrables/annex/2.1/Developments - Responses.xlsx")) %>% 
-#   select(1,3,5)  %>% 
-#   set_names(c("HEI", "Title", "Description"))  %>% 
-#    arrange(desc(HEI))
-# write.csv(datos, file="delivrables/annex/2.1/Table1.csv")
+#   read_excel(here("delivrables/annex/2.1/Developments - Responses.xlsx")) %>% 
+#   set_names(c("HEI", "Title-ES","Title-EN","Subtitle-ES","Subtitle-EN","Description-ES","Description-EN","Impacts-ES","Impacts-EN","TRL","Results","Field","Photo","Keywords","Contact"))   %>% 
+#   arrange(desc(HEI))  %>% 
+#   rowid_to_column("ID")
+
+# datos <- datos %>% 
+#   pivot_longer(2:ncol(datos))   %>%  
+#   mutate(
+#     value = value %>%
+#       str_replace_all("&", "\\\\&") %>%
+#       str_replace_all("%", "\\\\%") %>%
+#       str_replace_all("•\\s*", "- ")
+#   )
+
+# datos <- datos %>% 
+#   pivot_wider(names_from = name, values_from = value)   
+
+# write.csv(datos, file="delivrables/annex/2.1/Developments.csv")
 # rm(datos)
 
-datos <- read_csv(file = here("delivrables/annex/2.1/Table1.csv"))
 
- 
-datos %>%   
-  mutate(Description = tolower(Description))  %>% 
-  rowid_to_column("ID") %>% 
-  select(HEI, ID, Title, Description) %>% 
+datos <- read_csv(file = here("delivrables/annex/2.1/Developments.csv"))
+
+table1<- datos %>%   
+  #mutate(Description-EN = tolower(`Description-EN`))  %>% 
+  #rowid_to_column("ID") %>% 
+  select(HEI, ID, `Title-EN`, `Subtitle-EN`)  %>% 
+  #arrange(HEI) %>%
+  mutate(`Subtitle-EN` = str_to_sentence(`Subtitle-EN`))
+
+table1  %>% 
+mutate(HEI = factor(HEI))  %>% 
   arrange(HEI) %>%
   mutate_all(linebreak) %>%
   kbl("latex", booktabs = T, escape = F, row.names = F,
@@ -440,7 +465,7 @@ datos %>%
    column_spec(1, width = c("3cm"))  %>%
    column_spec(2, width = c("0.6cm"))  %>%
    column_spec(3, width = c("5.5cm")) %>%
-   column_spec(4, width = c("9.5cm")) %>%   
+   column_spec(4, width = c("9.5cm")) %>%
    collapse_rows(columns = 1:1, valign = "top")
    #pack_rows("Group 1", 3, 5, label_row_css = "background-color: #666; color: #fff;")
 ```
@@ -458,27 +483,35 @@ datos %>%
 #| tbl-cap: "Primary dataset of **Capabilities** at each HEI. Complete dataset is found in the Annex"
 
 # Global data
-
 # datos <- 
-#  read_excel(here("delivrables/annex/2.1/Capabilities - Responses.xlsx")) %>% 
-#    select(1,3,5)  %>% 
-#    set_names(c("HEI", "Title", "Description"))  %>% 
-#     arrange(desc(HEI))
-# write.csv(datos, file="delivrables/annex/2.1/Capabilities.csv")
-# rm(datos)
+#   read_excel(here("delivrables/annex/2.1/Capabilities - Responses.xlsx")) %>% 
+#   set_names(c("HEI", "Title-ES","Title-EN","Subtitle-ES","Subtitle-EN","Description-ES","Description-EN","Aplications-ES","Aplications-EN","Photo","Keywords","Contact")) %>% 
+#   arrange(desc(HEI))  %>% 
+#   mutate(HEI = str_to_title(HEI))  %>% 
+#   rowid_to_column("ID")
 
-datos <- read_csv(file= here("delivrables/annex/2.1/Capabilities.csv"))
-datos$Title <- gsub("&", " and ", datos$Title)
-datos$Description <- gsub("&", " and ", datos$Description)
+#  datos <- datos %>% 
+#    pivot_longer(2:ncol(datos))   %>%  
+#   mutate(
+#     value = value %>%
+#       str_replace_all("&", "\\\\&") %>%
+#       str_replace_all("%", "\\\\%") %>%
+#       str_replace_all("•\\s*", "- ")
+#   )
 
-#datos %>% str_detect("&")
-#View(datos)
+# datos <- datos %>% 
+#   pivot_wider(names_from = name, values_from = value)   
 
-datos <- 
-  datos %>% 
-  rowid_to_column("ID") %>% 
-  select(HEI, ID, Title, Description) %>% 
-  mutate(Description = tolower(Description))  %>% 
+# write.csv(datos, file="delivrables/annex/2.1/Capabilities2.csv")
+# View(datos)
+
+
+datos <- read_csv(file= here("delivrables/annex/2.1/Capabilities2.csv"))
+
+datos  %>% 
+  mutate(HEI = factor(HEI))  %>% 
+  select(HEI, ID, `Title-EN`, `Subtitle-EN`) %>% 
+  mutate(`Subtitle-EN` = str_to_sentence(`Subtitle-EN`))   %>% 
   arrange(HEI) %>%
   #mutate_all(linebreak) %>%
   kbl("latex", booktabs = T, escape = F, row.names = F,
@@ -486,7 +519,7 @@ datos <-
       #linesep = "\\midrule\\addlinespace"      
       ) %>%
    kable_styling(full_width = F, latex_options = c("repeat_header", "scale_down"), font_size = 7) %>% 
-   row_spec(0, color = "white", background = "Naranja", bold = T, font_size = 7) %>%
+   row_spec(0, color = "white", background = "Verde", bold = T, font_size = 7) %>%
    column_spec(1, width = c("3cm"))  %>%
    column_spec(2, width = c("0.6cm"))  %>%
    column_spec(3, width = c("5.5cm")) %>%
@@ -494,7 +527,7 @@ datos <-
    collapse_rows(columns = 1:1, valign = "top")
    #pack_rows("Group 1", 3, 5, label_row_css = "background-color: #666; color: #fff;")
 
-datos   
+ 
 ```
 
 
@@ -508,48 +541,46 @@ datos
 
 # Global data
 # datos <- 
-#  read_excel(here("delivrables/annex/2.1/Technical Services - Responses.xlsx")) %>% 
-#    select(1,3,5,11)  %>% 
-#    set_names(c("HEI", "Title", "Description", "Aplication"))  %>% 
-#    arrange(desc(HEI))
-# write.csv(datos, file="delivrables/annex/2.1/Technical.csv")
-# rm(datos)
+#   read_excel(here("delivrables/annex/2.1/Technical Services - Responses.xlsx")) %>% 
+#   set_names(c("HEI", "Title-ES","Title-EN","Subtitle-ES","Subtitle-EN","Description-ES","Description-EN","Technical-ES","Technical-EN","Applications-ES", "Applications-EN", 
+#   "Photo", "Keywords","Contact")) %>% 
+#   arrange(desc(HEI))  %>% 
+#   mutate(HEI = str_to_title(HEI))  %>% 
+#   rowid_to_column("ID")  %>% 
+#   pivot_longer(2:15) %>%  
+#   mutate(
+#     value = value %>%
+#       str_replace_all("&", "\\\\&") %>%
+#       str_replace_all("%", "\\\\%") %>%
+#       str_replace_all("•\\s*", "- ")
+#   )  %>% 
+#   pivot_wider(names_from = name, values_from = value)   
 
-datos <- 
-read_csv(file= here("delivrables/annex/2.1/Technical.csv"))  %>% 
-arrange(desc(HEI))
-#View(datos)
+# write.csv(datos, file="delivrables/annex/2.1/Technical2.csv")
+# names(datos)
 
+datos <- read_csv(file= here("delivrables/annex/2.1/Technical2.csv"))  
+#levels(as.factor(datos$HEI))
 
-# Chnge the & character
-#datos %>% str_detect("&")
-datos$Title <- gsub("&", " and ", datos$Title)
-datos$Description <- gsub("&", " and ", datos$Description)
-datos$Aplication <- gsub("&", " and ", datos$Aplication)
-
-#datos$Aplication %>% tolower()
-
-datos <- 
-  datos %>% 
-  rowid_to_column("ID") %>% 
-  select(HEI, ID, Title, Description) %>% 
-  mutate(Description = tolower(Description))  %>% 
-  arrange(HEI) %>%
+datos %>% 
+  select(HEI, ID, `Title-EN`, `Subtitle-EN`) %>%  
+  mutate(`Subtitle-EN` = str_to_sentence(`Subtitle-EN`)) %>%  
+  arrange(HEI)  %>% 
   #mutate_all(linebreak) %>%
   kbl("latex", booktabs = T, escape = F, row.names = F,
       longtable = T, 
       #linesep = "\\midrule\\addlinespace"      
       ) %>%
    kable_styling(full_width = F, latex_options = c("repeat_header", "scale_down"), font_size = 7) %>% 
-   row_spec(0, color = "white", background = "Naranja", bold = T, font_size = 7) %>%
+   row_spec(0, color = "white", background = "Celeste", bold = T, font_size = 7) %>%
    column_spec(1, width = c("2.5cm"))  %>%
    column_spec(2, width = c("0.6cm"))  %>%
    column_spec(3, width = c("5.5cm")) %>%
    column_spec(4, width = c("9.5cm")) %>%   
-   collapse_rows(columns = 1:1, valign = "top")
+   collapse_rows(columns = 1:1, valign = "top") 
    #pack_rows("Group 1", 3, 5, label_row_css = "background-color: #666; color: #fff;")
 
-datos   
+
 ```
 
 
@@ -570,16 +601,27 @@ datos
 # Global data
 # datos <- 
 #  read_excel(here("delivrables/annex/2.1/Training - Responses.xlsx")) %>% 
-#    select(1,3,5,11)  %>% 
-#    set_names(c("HEI", "Title", "Description", "Level"))  %>% 
-#    arrange(desc(HEI))
-# write.csv(datos, file="delivrables/annex/2.1/Training.csv")
-# rm(datos)
+#   set_names(c("HEI", "Title-ES","Title-EN","Content-ES","Content-EN","Description-ES","Description-EN","Area","Modality","Target", "Level", "Workload", "Language",
+#   "Photo", "Evaluation", "Certification", "Keywords","Contact")) %>% 
+#   arrange(desc(HEI))  %>% 
+#   mutate(HEI = str_to_title(HEI))  %>% 
+#   rowid_to_column("ID")  %>% 
+#   pivot_longer(2:19) %>%  
+#   mutate(
+#     value = value %>%
+#       str_replace_all("&", "\\\\&") %>%
+#       str_replace_all("%", "\\\\%") %>%
+#       str_replace_all("•\\s*", "- ")
+#   )  %>% 
+#   pivot_wider(names_from = name, values_from = value)   
 
 
-datos <- 
-read_csv(file= here("delivrables/annex/2.1/Training.csv")) %>% 
-arrange(desc(HEI))
+# write.csv(datos, file="delivrables/annex/2.1/Training2.csv")
+# names(datos)
+
+
+datos <- read_csv(file= here("delivrables/annex/2.1/Training2.csv")) 
+#View(datos)
 
 datos$Level <- as.factor(datos$Level)
 datos <-
@@ -589,52 +631,42 @@ datos <-
           `Introductorio / básico` = "Introductory"
       ))
 
-# Chnge the & character
-#datos %>% str_detect("&")
-datos$Title <- gsub("&", " and ", datos$Title)
-datos$Description <- gsub("&", " and ", datos$Description)
-#datos$Aplication <- gsub("&", " and ", datos$Aplication)
 
-#datos$Aplication %>% tolower()
-
-datos <- 
-  datos %>% arrange(desc(HEI)) %>% 
-  rowid_to_column("ID") %>% 
-  select(HEI, ID, Title, Description) %>% 
-  arrange(HEI) %>%
+datos %>% 
+  select(HEI, ID, `Title-EN`, `Content-EN`, Level) %>% 
+  arrange(desc(HEI)) %>%
   #mutate_all(linebreak) %>%
   kbl("latex", booktabs = T, escape = F, row.names = F,
       longtable = T, 
       #linesep = "\\midrule\\addlinespace"      
       ) %>%
    kable_styling(full_width = F, latex_options = c("repeat_header", "scale_down"), font_size = 7) %>% 
-   row_spec(0, color = "white", background = "Naranja", bold = T, font_size = 7) %>%
-   column_spec(1, width = c("3.5cm"))  %>%
+   row_spec(0, color = "white", background = "Neutro", bold = T, font_size = 7) %>%
+   column_spec(1, width = c("2cm"))  %>%
    column_spec(2, width = c("1cm"))  %>%
-   column_spec(3, width = c("5cm")) %>%
-   column_spec(4, width = c("9cm")) %>%   
+   column_spec(3, width = c("3cm")) %>%
+   column_spec(4, width = c("11cm")) %>%   
    collapse_rows(columns = 1:1, valign = "top")
    #pack_rows("Group 1", 3, 5, label_row_css = "background-color: #666; color: #fff;")
 
-datos   
+
 ```
 
 :::
 
 
 On the other hand, complementary qualitative data was obtained through the canvas-based workshop carried out during the consortium meeting in Chile as illustrated in the @fig-workshop. 
-This includes visual records of the completed canvas (@fig-canva1) by each HEIs, which capture collective reflections (@fig-canva2 and @fig-canva3) on the institutional insights, and identified opportunities for collaboration. 
+This includes visual records of the completed canvas by each HEIs, which capture collective reflections (@fig-canva2 and @fig-canva3) on the institutional insights, and identified opportunities for collaboration. 
 These materials provide additional context and depth to the structured dataset that are  included in the @sec-A2.
 
 
-:::{#fig-workshop layout="[[100],[48,-3,48]]"}
-
-![Example of canva discussed at the consortium meeting in Chile in Nov. 2025](figures/2.1/Canva-00.jpg){#fig-canva1 width="60%" fig-align="center"}
+:::{#fig-workshop layout="[48,-3,48]"}
 
 ![Workshop developed by each HEIs](figures/2.1/Canva-01.jpg){#fig-canva2 width="60%" fig-align="center"}
 
 ![Feedback made by the consortium meeting at Chile in Nov. 2025](figures/2.1/Canva-02.jpg){#fig-canva3 width="60%" fig-align="center"}
 
+Socialization of the canva for each HEI
 :::
 
 Together, these sources constitute a comprehensive and multi-layered dataset that will be fully used during the WP2 development, enabling both systematic analysis and contextual interpretation of the technology transfer capacities within the consortium.
@@ -750,34 +782,211 @@ pages=-]{annex/2.1/Annex-Trainings_a4.pdf}
 
 
 
-\newgeometry{a3paper, left=15mm,right=15mm, top=20mm, bottom=20mm}
+
+
 
 
 # Complete raw data collected throughout T2.1 {#sec-A2}
+
 ## Complete collected data - Developments
 
-\includepdf[landscape=true, scale=0.85, offset=0 0cm, pagecommand*={\pagestyle{fancy} },
+<!-- \includepdf[landscape=true, scale=0.85, offset=0 0cm, pagecommand*={\pagestyle{fancy} },
 pagecommand={\pagestyle{fancy}},
-pages=-]{annex/2.1/Developments - Responses.pdf}
+pages=-]{annex/2.1/Developments - Responses.pdf} -->
+
+\newgeometry{a1paper , left=15mm,right=15mm, top=20mm, bottom=20mm}
+
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.75}
+
+:::landscape
+```{r}
+#| include: true
+#| eval: true
+
+datos <- read_csv(here("delivrables/annex/2.1/Developments.csv"))
+
+datos %>% 
+  select(-1, -Photo, -Contact) %>% 
+  #mutate(Description = tolower(Description))  %>%   
+  #select(HEI, ID, Title, Description) %>% 
+  arrange(ID) %>%
+  #mutate_all(linebreak) %>%
+  kbl("latex", booktabs = T, escape = F, row.names = F,
+      longtable = T, 
+      linesep = "\\midrule\\addlinespace"      
+      ) %>%
+   kable_styling(full_width = F, latex_options = c("repeat_header"), font_size = 3) %>% 
+   row_spec(0, color = "white", background = "Naranja", bold = T, font_size = 4) %>%
+   column_spec(1, width = c("0.5mm")) %>%  
+   column_spec(2, width = c("0.5cm"))  %>%
+   column_spec(3, width = c("0.5cm")) %>%
+   column_spec(4, width = c("0.5cm")) %>% 
+   column_spec(5, width = c("1cm")) %>%  
+   column_spec(6, width = c("1cm")) %>%     
+   column_spec(7, width = c("3.5cm")) %>%
+   column_spec(8, width = c("3.5cm")) %>% 
+   column_spec(9, width = c("2.5cm")) %>%
+   column_spec(10, width = c("2.5cm")) %>% 
+   column_spec(11, width = c("1.5cm")) %>% 
+   column_spec(12, width = c("1.5cm")) %>%
+   column_spec(13, width = c("1cm")) %>%           
+   column_spec(14, width = c("1cm"))
+      
+```
+
+:::
+
+\restoregeometry
 
 
 ## Complete collected data - Capabilities
 
-\includepdf[landscape=true, scale=0.90, frame=false,  offset=0 0cm, pagecommand*={\pagestyle{fancy} },
+<!-- \includepdf[landscape=true, scale=0.90, frame=false,  offset=0 0cm, pagecommand*={\pagestyle{fancy} },
 pagecommand={\pagestyle{fancy}},
-pages=-]{annex/2.1/Capabilities - Responses.pdf}
+pages=-]{annex/2.1/Capabilities - Responses.pdf} -->
+
+
+
+:::landscape
+```{r}
+#| include: true
+#| eval: true
+
+datos <- read_csv(here("delivrables/annex/2.1/Capabilities2.csv"))
+
+datos %>% 
+  select(-1, -Photo, -Contact) %>% 
+  #mutate(Description = tolower(Description))  %>%   
+  #select(HEI, ID, Title, Description) %>% 
+  #arrange(ID) %>%
+  #mutate_all(linebreak) %>%
+  kbl("latex", booktabs = T, escape = F, row.names = F,
+      longtable = T, 
+      linesep = "\\midrule\\addlinespace"      
+      ) %>%
+   kable_styling(full_width = F, latex_options = c("repeat_header"), font_size = 3) %>% 
+   row_spec(0, color = "white", background = "Verde", bold = T, font_size = 4) %>%
+   column_spec(1, width = c("0.5mm")) %>%  
+   column_spec(2, width = c("0.5cm"))  %>%
+   column_spec(3, width = c("0.5cm")) %>%
+   column_spec(4, width = c("0.5cm")) %>% 
+   column_spec(5, width = c("1cm")) %>%  
+   column_spec(6, width = c("1cm")) %>%     
+   column_spec(7, width = c("6cm")) %>%
+   column_spec(8, width = c("6cm")) %>% 
+   column_spec(9, width = c("1.5cm")) %>%
+   column_spec(10, width = c("1.5cm")) %>% 
+   column_spec(11, width = c("1cm")) 
+   #column_spec(12, width = c("1.5cm")) %>%
+   #column_spec(13, width = c("1cm")) %>%           
+   #column_spec(14, width = c("1cm"))
+      
+```
+
+:::
+
+
+
+
+
 
 ## Complete collected data - Technical
 
-\includepdf[landscape=true, scale=1, frame=false,  offset=0 0cm, pagecommand*={\pagestyle{fancy} },
+<!-- \includepdf[landscape=true, scale=1, frame=false,  offset=0 0cm, pagecommand*={\pagestyle{fancy} },
 pagecommand={\pagestyle{fancy}},
-pages=-]{annex/2.1/Technical Services - Responses.pdf}
+pages=-]{annex/2.1/Technical Services - Responses.pdf} -->
 
+
+
+:::landscape
+```{r}
+#| include: true
+#| eval: true
+
+datos <- read_csv(file= here("delivrables/annex/2.1/Technical2.csv"))  
+#levels(as.factor(datos$HEI))
+
+datos %>% 
+  select(-1, -Photo, -Contact) %>% 
+  #mutate(Description = tolower(Description))  %>%   
+  #select(HEI, ID, Title, Description) %>% 
+  #arrange(ID) %>%
+  #mutate_all(linebreak) %>%
+  kbl("latex", booktabs = T, escape = F, row.names = F,
+      longtable = T, 
+      linesep = "\\midrule\\addlinespace"      
+      ) %>%
+   kable_styling(full_width = F, latex_options = c("repeat_header"), font_size = 3) %>% 
+   row_spec(0, color = "white", background = "Celeste", bold = T, font_size = 4) %>%
+   column_spec(1, width = c("0.5mm")) %>%  
+   column_spec(2, width = c("0.5cm"))  %>%
+   column_spec(3, width = c("0.5cm")) %>%
+   column_spec(4, width = c("0.5cm")) %>% 
+   column_spec(5, width = c("0.5cm")) %>%  
+   column_spec(6, width = c("1cm")) %>%     
+   column_spec(7, width = c("3.5cm")) %>%
+   column_spec(8, width = c("3.5cm")) %>% 
+   column_spec(9, width = c("2.5cm")) %>%
+   column_spec(10, width = c("2.5cm")) %>% 
+   column_spec(11, width = c("2cm")) %>% 
+   column_spec(12, width = c("2.5cm")) %>%
+   column_spec(13, width = c("1cm")) %>%           
+   column_spec(14, width = c("1.5cm"))
+      
+```
+
+:::
 
 ## Complete collected data - Training
 
-\includepdf[landscape=false, scale=0.90, frame=false,  offset=0 0cm, pagecommand*={\pagestyle{fancy} },
+<!-- \includepdf[landscape=false, scale=0.90, frame=false,  offset=0 0cm, pagecommand*={\pagestyle{fancy} },
 pagecommand={\pagestyle{fancy}},
-pages=-]{annex/2.1/Training - Responses.pdf}
+pages=-]{annex/2.1/Training - Responses.pdf} -->
+
+
+:::landscape
+```{r}
+#| include: true
+#| eval: true
+
+datos <- read_csv(file= here("delivrables/annex/2.1/Training2.csv"))  
+#levels(as.factor(datos$HEI))
+
+datos %>% 
+  select(-1, -Photo, -Contact) %>% 
+  #mutate(Description = tolower(Description))  %>%   
+  #select(HEI, ID, Title, Description) %>% 
+  #arrange(ID) %>%
+  #mutate_all(linebreak) %>%
+  kbl("latex", booktabs = T, escape = F, row.names = F,
+      longtable = T, 
+      linesep = "\\midrule\\addlinespace"      
+      ) %>%
+   kable_styling(full_width = F, latex_options = c("repeat_header", "scale_down"), font_size = 3) %>% 
+   row_spec(0, color = "white", background = "Neutro", bold = T, font_size = 4) %>%
+   column_spec(1, width = c("0.5mm")) %>%  
+   column_spec(2, width = c("0.5cm"))  %>%
+   column_spec(3, width = c("0.5cm")) %>%
+   column_spec(4, width = c("0.5cm")) %>% 
+   column_spec(5, width = c("2cm")) %>%  
+   column_spec(6, width = c("2cm")) %>%     
+   column_spec(7, width = c("2cm")) %>%
+   column_spec(8, width = c("2cm")) %>% 
+   column_spec(9, width = c("1cm")) %>%
+   column_spec(10, width = c("1cm")) %>% 
+   column_spec(11, width = c("1cm")) %>% 
+   column_spec(12, width = c("1cm")) %>%
+   column_spec(13, width = c("1cm")) %>%           
+   column_spec(14, width = c("0.5cm"))  %>% 
+   column_spec(15, width = c("2cm")) %>% 
+   column_spec(16, width = c("0.5cm")) %>% 
+   column_spec(17, width = c("1cm")) %>% 
+   column_spec(18, width = c("1cm"))
+      
+```
+
+:::
+
 
 
