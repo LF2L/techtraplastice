@@ -28,7 +28,7 @@ format:
    x unit = 0.7cm,
    time slot format = isodate-yearmonth,
    time slot unit=month,
-   today=2026-05,
+   today=2026-07,
    progress= today,
    title/.append style={draw=none, fill= Neutro},
    title label font=\sffamily\bfseries\color{white},
@@ -50,7 +50,8 @@ format:
    milestone incomplete/.style={/pgfgantt/milestone, fill=orange},
    milestone label font=\small\bfseries\color{orange},
    milestone progress label node/.style={anchor = west, inner sep=10pt},
-   EBA/.style={milestone incomplete/.append style={fill=OliveGreen}}
+   EBA/.style={milestone incomplete/.append style={fill=OliveGreen}},
+   DEL/.style={milestone incomplete/.append style={fill=Blue}}
 ]{2025-02}{2028-01}
 
 \gantttitle[]{TechTraPlastiCE timeline}{36}\\  
@@ -70,7 +71,7 @@ format:
 
 % Milestone 1
 \ganttmilestone[progress=100]{Milestone 1: Industries/companies are committed with the project and responds consultations}{2025-07} \\
-\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white}\large Presentation of External Board Advisory}}{2025-12} \\
+\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white} Presentation of External Board Advisory}}{2025-12} \\
 \ganttnewline[thick, Celeste]  \\
 
 % Working package 2
@@ -84,8 +85,9 @@ format:
 % Milestone 1
 \ganttmilestone[progress=100]{Milestone 2: Solutions identification and potential providers at each partner (at least 2 per partner provided)}{2025-11} \\
 
+
 % External Board
-\ganttmilestone[EBA, progress=100]{\colorbox{OliveGreen}{\color{white}\large I Participation External Board Advisory}}{2026-02} 
+\ganttmilestone[EBA, progress=100]{\colorbox{OliveGreen}{\color{white} I Participation External Board Advisory}}{2026-02} 
 \ganttnewline[thick, Celeste] \\
 
 
@@ -94,16 +96,26 @@ format:
 \ganttgroup{WP3: Multi-actor collaborations for just and safe plastic’s circular economy }{2026-02}{2027-08} \\
 
 % Tareas
-\ganttbar[name=3a, progress=10, progress label text={ }]{Reuse action clues in Argentina, Chile and Colombia}{2026-02}{2026-10} \\
-\ganttbar[name=3b, progress=10,  progress label text={ }]{Engaging local stakeholders}{2026-02}{2026-11} \\
-\ganttbar[name=3c, progress=10,  progress label text={ }]{Assessment of local reuse systems and benchmarking with impactful reuse practices}{2026-05}{2026-11} \\
+\ganttbar[name=3a, progress=40, progress label text={40\%}]{Reuse action clues in Argentina, Chile and Colombia}{2026-02}{2026-10} \\
+\ganttbar[name=3b, progress=10,  progress label text={25\%}]{Engaging local stakeholders}{2026-02}{2026-11} \\
+\ganttbar[name=3c, progress=20,  progress label text={20\%}]{Assessment of local reuse systems and benchmarking with impactful reuse practices}{2026-05}{2026-11} \\
 \ganttbar[name=3d, progress=0,  progress label text={ }]{Search Conference}{2026-08}{2027-06} \\
 \ganttbar[name=3e, progress=0,  progress label text={ }]{Implementation of collaborative initiatives}{2026-11}{2027-08} \\
 
 
 \ganttmilestone[progress=0]{Milestone 3: Local stakeholders are engaged}{2026-07} \\
 
-\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white}\large  II Participation External Board Advisory}}{2026-10} 
+
+% Deliverables  WP3
+\ganttmilestone[DEL, progress=0]{\color{Blue} D3.1: Comprehensive Problem Definition on the Reuse Challenge}{2026-10} \\
+\ganttmilestone[DEL, progress=0]{\color{Blue} D3.2: Report on Contacts and Results of Interviews}{2027-02} \\
+\ganttmilestone[DEL, progress=0]{\color{Blue} D3.3: Benchmarking study}{2026-11} \\
+\ganttmilestone[DEL, progress=0]{\color{Blue} D3.4: Search conference reports}{2027-06} \\
+\ganttmilestone[DEL, progress=0]{\color{Blue} D3.5: Updated portfolios}{2027-08} \\
+
+% External Board
+\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white} II Participation External Board Advisory}}{2026-10} 
+
 \ganttnewline[thick, Celeste] 
 \\
 
@@ -112,13 +124,13 @@ format:
 
 
 % Tareas
-\ganttbar[name=4a, progress=0, progress label text={ }]{Pedagogical Integration of Industry at the University}{2025-11}{2027-07} \\
+\ganttbar[name=4a, progress=60, progress label text={60\%}]{Pedagogical Integration of Industry at the University}{2025-11}{2027-07} \\
 \ganttbar[name=4b, progress=0,  progress label text={ }]{Pilots implementation}{2026-08}{2027-10} \\
 \ganttbar[name=4c, progress=0,  progress label text={ }]{Cross evaluation of pilot projects between Latin American Universities}{2027-02}{2027-10} \\
 
 
 % III EBA
-\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white}\large  III Participation External Board Advisory}}{2027-05} \\
+\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white}  III Participation External Board Advisory}}{2027-05} \\
 
 \ganttbar[name=4d, progress=0,  progress label text={ }]{Institutional Recommendations}{2027-05}{2028-01} \\
 
@@ -126,7 +138,7 @@ format:
 \ganttmilestone[progress=0]{Milestone 5: Cross-evaluation completed}{2027-10} \\
 
 % IV EBA
-\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white}\large IV Participation External Board Advisory}}{2027-11} 
+\ganttmilestone[EBA]{\colorbox{OliveGreen}{\color{white}\large  Participation External Board Advisory}}{2027-11} 
 \ganttnewline[thick, Celeste] 
 \\
 

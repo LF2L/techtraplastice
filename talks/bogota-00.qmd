@@ -1,0 +1,66 @@
+---
+author:
+  - name: Asst. Prof. Fabio A. CRUZ SANCHEZ
+    affiliation:
+      - name: Université de Lorraine
+        department:  ENSGSI
+        address: 8 rue Bastien Lepage
+        city: Nancy
+        country: France
+        postal-code: 54000
+fontsize: 12pt
+format:
+  pdf:
+    output-file: day1
+    include-in-header: [../assets/letters.tex]
+    keep-tex: false
+---
+
+# Apertura
+
+## Estadistica importante.
+
+
+## Historia Personal
+
+
+Muy buenos dias a todos y todas 
+
+Un saludo muy cordial a la Rectora de la Universidad Central de Colombia Dra Paula Andrea López, 
+y a su equipo de la vicerectoria, Dra. Luz Dalila Rivas de
+ la oficina de transferencia technologica, Dra. Olga Yaneth Vasquez 
+y al Decano de la Facultad de Ingenieria y Ciencias Basicas, Ing. Wilmer Mesias López, 
+
+
+Retomo las palabras de la Dra. Paula Andrea López, Rectora de la Universidad Central de Colombia, quien nos ha dado la bienvenida a este evento y nos ha recordado la importancia de la colaboración entre diferentes actores para abordar el problema del plástico.
+
+
+a los colegas del consorcio del proyecto TechTraPlastiCE y a todos los presentes.
+
+
+
+Quiero dar un saludo cordial a
+los colegas de la Universidad Central de Colombia. 
+
+
+Estimados y estimadas Colegas. 
+
+Por favor permitante de antemano agradecer su presencia en este evento y por su interes en el proyecto TechTraPlastiCE. 
+
+
+
+
+Mi nombre es Fabio A. Cruz Sanchez, como profesor de la Université de Lorraine y Coordinador General del proyecto TechTraPlastiCE, 
+
+Primero que todo agradezcos a la Universidad Central de Colombia por recivir el cosorcio del proyecto TechtraPlasticE en la ciudad de Bogota. 
+
+
+Ideas principales:
+1. Agradecer de manera formal a la Unvcersidad por el revivir al consortium
+2. Decir que el problema de plastico es u proble sistemico que necesita un vision cruzada entre diferentes actores. Es un honor que la Univerdisas central permita ese espacio para poder iniciar la semilla de una trayectoria de colaboracion entre diferentes actores de la sociedad.
+
+# Cuerpo
+
+
+
+# Conclusion
