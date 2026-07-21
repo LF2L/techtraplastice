@@ -104,22 +104,30 @@ We seek operational success by carrying out joint recycling interventions integr
 
 ✅ SO2: Create and implement **services and solutions portfolios** for the plastics value chain based on the university's core competencies and knowledge. 
 
-## Ou Challenge we have done ? {.naranja }
+## Our Challenge in the short term? 
 
 🚧 SO3: Encourage **multi-actor initiatives** to enhance the reuse of plastic involving waste pickers organizations, companies and the local public sectors, taking advantage of the University's articulation capacities. 
 
+
+![](bogota-01.jpg){width="50%" fig-align="center"}
+
+
+## Our Challenge in the short term? 
+
 🔜 SO4: Develop **recommendations on new technologies, business models, and organizational setups for university-industry collaborations** based on the lessons learned from the implemented projects as a tool to improve, scale up and transfer good practices in HEIs in Latin America. 
 
-## Approach {.naranja}
+![](bogota-02.jpeg){width="50%" fig-align="center"}
 
-![](figures/TechTraPlastiCE-Approach.png)
+## {.white background-image="../assets/img/Tema-Verde-Final.png" background-size="cover" background-position="50% 50%"}
 
+[Thank you for your attention and interest in the TechTraPlastiCE project. We look forward to collaborating with all stakeholders to advance circular economy practices in the plastics sector across Latin America.
+]{style="color:white;"}
 
-## Milestones {.naranja}
-
-![](figures/Milestones.png)
-
-## 
+:::{layout="[50, 50]"}
 
 
-![](figures/TechTraPlastiCE-Approach.png)
+![](../assets/img/logos/TTPCE.png){width="100%" fig-align="center"}
+
+![](../images/logo/CO-UC.jpg){width="50%" fig-align="center"}
+:::
+
